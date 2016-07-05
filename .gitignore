@@ -1,0 +1,4 @@
+*.pyc
+.idea
+staticroot
+db.sqlite3
