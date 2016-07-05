@@ -1,0 +1,7 @@
+{
+  "name": "Sanalytics",
+  "description": "My implementation of a simple analytics collection engine",
+  "image": "heroku/python",
+  "repository": "https://github.com/LucasSimpson/sanalytics",
+  "keywords": ["python", "django" ]
+}
