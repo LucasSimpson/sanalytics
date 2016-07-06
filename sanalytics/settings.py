@@ -79,12 +79,11 @@ WSGI_APPLICATION = 'sanalytics.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/1.9/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    }
-}
+DB_URL_DEFAULT = 'postgres://sbkqhijggtnvdb:MTl6op--ukheDWd_k6OVBbsGeX@ec2-54-221-229-37.compute-1.amazonaws.com:5432/dt98dr00aha2m'
+DB_URL = os.environ.get('DATABASE_URL', DB_URL_DEFAULT)
+
+import dj_database_url
+DATABASES = {'default': dj_database_url.parse(DB_URL, conn_max_age=600)}
 
 
 # Password validation
