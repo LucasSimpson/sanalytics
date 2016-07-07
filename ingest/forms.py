@@ -1,7 +1,8 @@
-from django.forms import ModelForm
-from .models import Event
+from django import forms
+from .models import Event, AuthToken
 
-class EventForm(ModelForm):
-    class Meta:
-        model = Event
-        fields = ['domain', 'event_type', 'json_data', 'user_token']
+class EventForm(forms.Form):
+    auth_token = forms.CharField(max_length=AuthToken.Constants.auth_token_ml)
+    event_type = forms.CharField(max_length=Event.Constants.event_type_ml)
+    user_token = forms.CharField(max_length=Event.Constants.user_token_ml)
+    json_data = forms.CharField(max_length=Event.Constants.json_data_ml)
