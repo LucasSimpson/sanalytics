@@ -1,0 +1,23 @@
+{% load staticfiles %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}{% endblock %}</title>
+
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.0.0.min.js" integrity="sha256-JmvOoLtYsmqlsWxa7mDSLMwa6dZ9rrIdtrrVYRnDRH0=" crossorigin="anonymous"></script>
+
+    <!-- base.js -->
+    <script src="{% static 'js/base.js' %}"></script>
+    <!-- sanalytics.js -->
+    <script src="{% static 'js/sanalytics.js' %}"></script>
+
+    <!-- page specific static assets -->
+    {% block staticfiles %}{% endblock %}
+</head>
+<body>
+    {% block content %}{% endblock %}
+</body>
+</html>

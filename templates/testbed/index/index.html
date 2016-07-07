@@ -1,0 +1,12 @@
+{% extends 'base/base.html' %}
+{% load staticfiles %}
+
+{% block title %}Index View{% endblock %}
+
+{% block staticfiles %}
+    <script src="{% static 'js/testbed/index.js' %}"></script>
+{% endblock %}
+
+{% block content %}
+<h1>Welcome to the IndexView!</h1>
+{% endblock %}
