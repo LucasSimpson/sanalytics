@@ -3,10 +3,10 @@
 function registerEvent(domain, eventType, jsonData, userToken) {
     var endpoint = '/ingest/';
     var data = {
-        'domain': domain,
-        'event_type': eventType,
-        'json_data': JSON.stringify(jsonData),
-        'user_token': userToken === undefined ? 'anon' : userToken
+        auth_token: 'lolzeveryonesallowed',
+        event_category: eventType,
+        event_user: userToken === undefined ? 'anon' : userToken,
+        json_data: JSON.stringify(jsonData),
     };
     console.log(data);
 

@@ -3,6 +3,7 @@ from django.http import JsonResponse
 
 from .forms import EventForm
 from .models import Event
+from .helpers import build_event
 
 # Create your views here.
 class IngestionView(View):
@@ -11,13 +12,13 @@ class IngestionView(View):
     def post(self, request, *args, **kwargs):
         form = EventForm(request.POST)
         if form.is_valid():
-            print form.cleaned_data
-            event = Event()
-            event.domain = form.cleaned_data['domain']
-            event.event_type = form.cleaned_data['event_type']
-            event.json_data = form.cleaned_data['json_data']
-            event.user_token = form.cleaned_data['user_token']
-            event.save()
+            auth_token = form.cleaned_data['auth_token']
+            category = form.cleaned_data['event_category']
+            user = form.cleaned_data['event_user']
+            json_data = form.cleaned_data['json_data']
+
+            event = build_event(category, user, json_data)
+
             return JsonResponse({'status': 'success'}, status=200)
         else:
             for error in form.errors:

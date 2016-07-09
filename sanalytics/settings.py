@@ -31,15 +31,20 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    # Ingestion app
     'ingest',
 
+    # Django Rest Framework
+    'rest_framework',
+
+    # Django defaults
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
 
-    # white noise serving in development
+    # White Noise serving in development
     'whitenoise.runserver_nostatic',
     'django.contrib.staticfiles',
 ]
