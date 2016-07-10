@@ -5,26 +5,10 @@ from rest_framework import serializers
 from .models import Event, EventCategory, EventUser
 
 
-class EventUserNameSerializer(serializers.Field):
-    def to_representation(self, event_user):
-        return event_user.uuid
-
-    def to_internal_value(self, data):
-        return EventUser.objects.get(uuid=data)
-
-
-class EventCategoryNameSerializer(serializers.Field):
-    def to_representation(self, event_category):
-        return event_category.category
-
-    def to_internal_value(self, data):
-        return EventCategory.objects.get(category=data)
-
-
 class EventSerializer(serializers.Serializer):
     json_data = serializers.CharField()
-    user = EventUserNameSerializer()
-    category = EventCategoryNameSerializer()
+    user = serializers.CharField()
+    category = serializers.CharField()
 
     def create(self, data):
         c = data.get('event_category', 'uncategorized')

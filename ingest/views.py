@@ -12,13 +12,13 @@ class IngestionAPIView(APIView):
     permission_classes = ()
 
     def post(self, request):
-        form = EventForm(request.POST)
-        serializer = EventSerializer(data=request.POST)
+        print request.data
+        serializer = EventSerializer(data=request.data)
 
         if serializer.is_valid():
             event = serializer.create(serializer.validated_data)
-            return Response({'status': 'success'})
+            return Response({'result': serializer.data})
 
         else:
             print 'errors!'
-            return Response({'status': 'failure', 'errors': serializer.errors}, status=status.HTTP_400_BAD_REQUEST)
+            return Response({'errors': serializer.errors}, status=status.HTTP_400_BAD_REQUEST)
