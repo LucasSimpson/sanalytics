@@ -23,26 +23,25 @@ class EventCategoryNameSerializer(serializers.Field):
 
 class EventSerializer(serializers.Serializer):
     json_data = serializers.CharField()
+    user = EventUserNameSerializer()
+    category = EventCategoryNameSerializer()
 
     def create(self, data):
-        print 'in create'
         c = data.get('event_category', 'uncategorized')
-        u = data.get('event_user', 'anon')
-
         try:
             category = EventCategory.objects.get(category=c)
         except ObjectDoesNotExist:
             category = EventCategory()
-            category.category = category
+            category.category = c
             category.save()
 
+        u = data.get('event_user', 'anon')
         try:
             user = EventUser.objects.get(uuid=u)
         except ObjectDoesNotExist:
             user = EventUser()
-            user.uuid = user
+            user.uuid = u
             user.save()
-
 
         event = Event()
         event.json_data = data.get('json_data', '')
@@ -50,4 +49,4 @@ class EventSerializer(serializers.Serializer):
         event.user = user
         event.save()
 
-        return ''
+        return event
