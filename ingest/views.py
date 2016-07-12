@@ -1,19 +1,23 @@
-from .forms import EventForm
-
-from rest_framework.views import APIView
+from rest_framework.generics import ListAPIView
+from rest_framework.mixins import ListModelMixin
 from rest_framework.response import Response
 from rest_framework import status
 
 from .serializers import EventSerializer
+from .models import Event
 
 
-class IngestionAPIView(APIView):
+class IngestionAPIView(ListAPIView):
     authentication_classes = ()
     permission_classes = ()
+    serializer_class = EventSerializer
+
+    queryset = Event.objects.all()
+
+
 
     def post(self, request):
-        print request.data
-        serializer = EventSerializer(data=request.data)
+        serializer = IngestionAPIView.serializer_class(data=request.data)
 
         if serializer.is_valid():
             event = serializer.create(serializer.validated_data)
